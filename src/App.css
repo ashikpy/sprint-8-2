@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.dbg {
+  border: 2px dotted red;
+}
