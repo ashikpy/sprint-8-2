@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -6,6 +7,45 @@ import ExpenseChart from "./components/ExpenseChart";
 import ExpenseList from "./components/ExpenseList";
 
 function App() {
+  const [expenses, setExpenses] = useState([
+    {
+      id: 1,
+      amount: 234,
+      category: "Education",
+      date: "2025-01-10",
+    },
+    {
+      id: 2,
+      amount: 150,
+      category: "Food",
+      date: "2025-01-12",
+    },
+    {
+      id: 3,
+      amount: 80,
+      category: "Transport",
+      date: "2025-01-13",
+    },
+  ]);
+
+  const addExpense = (expense) => {
+    const newExpense = {
+      ...expense,
+      id: Date.now(), // Simple ID generation
+      amount: parseFloat(expense.amount),
+    };
+    setExpenses([...expenses, newExpense]);
+  };
+
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
+
+  const totalExpenses = expenses.reduce(
+    (total, expense) => total + expense.amount,
+    0
+  );
+
   return (
     <div>
       <Navbar />
@@ -19,15 +59,15 @@ function App() {
           </p>
         </div>
         <div className="flex gap-2 justify-between items-stretch">
-          <Hero />
+          <Hero totalExpenses={totalExpenses} />
           <div className="flex-1 h-auto">
             <div className="h-full">
-              <ExpenseChart />
+              <ExpenseChart expenses={expenses} />
             </div>
           </div>
         </div>
-        <ExpenseForm />
-        <ExpenseList />
+        <ExpenseForm onAddExpense={addExpense} />
+        <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
         {/*
          */}
       </div>
