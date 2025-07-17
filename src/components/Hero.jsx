@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-
+/* eslint-disable react/prop-types */
 export default function Hero({ totalExpenses }) {
   return (
     <div>
@@ -10,7 +9,3 @@ export default function Hero({ totalExpenses }) {
     </div>
   );
 }
-
-Hero.propTypes = {
-  totalExpenses: PropTypes.number.isRequired,
-};

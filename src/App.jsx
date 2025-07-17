@@ -68,8 +68,6 @@ function App() {
         </div>
         <ExpenseForm onAddExpense={addExpense} />
         <ExpenseList expenses={expenses} onDeleteExpense={deleteExpense} />
-        {/*
-         */}
       </div>
     </div>
   );
